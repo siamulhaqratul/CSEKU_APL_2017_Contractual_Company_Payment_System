@@ -1,0 +1,19 @@
+Project name: Contractual Company Payment System
+
+Project Description: 
+
+		Progamming Language : Laravel, Android
+		Database 			: MS SQL Server
+
+Platform : Web Application,Android Mobile Application
+
+
+Developed by:
+
+	Ryhan Ahmed Tamim (160230)
+	Swagato Das(160232)
+
+Project Manager:
+
+	Kazi Masudul Alam
+	Sarfaraz Newaz 
