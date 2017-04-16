@@ -27,11 +27,7 @@
                             <div class="col-md-6">
                                 <input id="phonenumber" type="text" class="form-control" name="amount_paid" value="{{ old('phonenumber') }}" required autofocus>
 
-                                @if ($errors->has('phonenumber'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('phonenumber') }}</strong>
-                                    </span>
-                                @endif
+                             
                             </div>
                         </div>
 
@@ -39,7 +35,9 @@
                             <label for="start_date" class="col-md-4 control-label">Date</label>
 
                             <div class="col-md-6">
-                                <input id="start_date" type="text" class="form-control" name="date" value="{{ old('start_date') }} ">
+                                <input id="start_date" type="text" class="form-control" placeholder="dd/mm/YYYY" name="date" value="{{ old('start_date') }}" required>
+
+
                             </div>
                         </div>
 

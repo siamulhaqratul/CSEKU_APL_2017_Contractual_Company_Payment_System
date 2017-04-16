@@ -10,17 +10,30 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th style="text-align:center">
-                                Duty Date <a  onclick="return check()" href="<?=URL::to('admin/see_history',array($id))?>" class="btn btn-primary">Sort Ascending</a>
 
-                                <a  onclick="return check()" href="<?=URL::to('admin/see_history/des/date',array($id))?>" class="btn btn-primary">Sort Descending</a>
+                                <th style="text-align:center">
+                                Duty Date 
+
+
+                                @if($data1 == "Sort Ascending")
+                                 <a  onclick="return check()" href="<?=URL::to('admin/see_history/des/date',array($id))?>" class="btn btn-primary">Sort Descending</a>
+
+                                 @else
+                                <a  onclick="return check()" href="<?=URL::to('admin/see_history',array($id))?>" class="btn btn-primary">Sort Ascending</a>
+
+                               
+
+                                @endif
 
                                 </th>
                                 <th style="text-align:center">Status
-
+                                 @if($data == "Sort Ascending")
                                 <a  onclick="return check()" href="<?=URL::to('admin/see_history/asc/app',array($id))?>" class="btn btn-primary">Sort Ascending</a></center>
+                                @else
 
                                 <a  onclick="return check()" href="<?=URL::to('admin/see_history/dsc/app',array($id))?>" class="btn btn-primary">Sort Descending</a></th>
+
+                                @endif
                             </tr>
                         </thead>
                         <tbody>       

@@ -23,7 +23,7 @@
 
                                 <td><center>{{$staff_duty->duty_date}}</center></td>
                               
-                                <td><center>Got Payment</center></td>
+                                <td><center>Received</center></td>
 
                                 @endif
                                 @endforeach
@@ -57,7 +57,7 @@
                                <td style="text-align:center">  
 
                                     <a  onclick="return check()" href="<?=URL::to('staff/confirmpayment',array($staff_duty->id))?>" class="btn btn-primary">
-                                        <span class="glyphicon glyphicon-trash"></span>Got Payment</a>
+                                      Receive</a>
                                     </td>
                                     @endif
                                 @endforeach

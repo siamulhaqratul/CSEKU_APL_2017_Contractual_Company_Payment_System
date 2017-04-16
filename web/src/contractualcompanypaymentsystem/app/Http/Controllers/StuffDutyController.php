@@ -39,7 +39,7 @@ class StuffDutyController extends Controller
             $d= strtotime($d);
 
             if($d == $date2 && $s->contract_id == $request->contract_id){
-                return "Duty Alrady Submitted";
+                return  $d;
             }
 
 

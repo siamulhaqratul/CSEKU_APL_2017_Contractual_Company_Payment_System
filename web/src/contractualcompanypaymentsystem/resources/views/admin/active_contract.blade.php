@@ -24,7 +24,7 @@
                                 <td><center>{{$contract_detail->client->name}}</center></td>
                                 <td><center>{{$contract_detail->staff->name}}</center></td>
                                 <td style="text-align:center">  
-                                    <a  onclick="return check()" href="<?=URL::to('staff/cancelcontract',array($contract_detail->id))?>" class="btn btn-danger">Detete</a>
+                                    <a  onclick="return delete()" href="<?=URL::to('admin/closecontract',array($contract_detail->id))?>" class="btn btn-danger">Close</a>
                                 </td>
 
                                  <td style="text-align:center">  

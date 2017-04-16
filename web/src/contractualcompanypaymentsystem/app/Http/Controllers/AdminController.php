@@ -26,9 +26,45 @@ class AdminController extends Controller
 		$user->save();
 		return redirect('admin/user_request');
 	}
+
+	public function closeContract($id){
+  
+       $staff_duties = StuffDuty::all();
+
+       foreach ($staff_duties as $staff_duty) {
+       	
+       		if($id == $staff_duty->contract_id && $staff_duty->approved_by_client == 1 && $staff_duty->paid ==0){
+
+       			return redirect('admin/sorry');
+       		}
+
+       }
+
+       $contract_details = Contract_detail::find($id);
+       $contract_details->staff_id=null;
+       $contract_details->client_id=null;
+       $contract_details->save();
+       return redirect('admin/active_contract');
+
+
+	}
 	public function delete($id){
+
+
+		$contract_details = Contract_detail::all();
+
+       foreach ($contract_details as $contract_detail) {
+       	
+       		if((($contract_detail->staff_id == $id)|| ($contract_detail->client_id == $id))){
+
+       			return redirect('admin/sorry2');
+       		}
+
+       }
+
+
 		User::find($id)->delete();    
-		return redirect('admin/home');
+		return redirect('admin/active_user');
 	}
 
 	public function sendPayment($id){
@@ -49,11 +85,23 @@ class AdminController extends Controller
 
 
  	public function disable($id){
+
+ 		$contract_details = Contract_detail::all();
+
+       foreach ($contract_details as $contract_detail) {
+       	
+       		if((($contract_detail->staff_id == $id)|| ($contract_detail->client_id == $id))){
+
+       			return redirect('admin/sorry3');
+       		}
+       	}
+
+
         $user= User::find($id);
 		$user->approve=0;
 		$user->save();
 
-		return redirect('admin/home');
+		return redirect('admin/active_user');
 
 	}
 
@@ -110,7 +158,7 @@ class AdminController extends Controller
 		$contract_details->payment_for_staff_monthly=null;
 		
 		$contract_details->save();
-		return redirect('admin/active_contract');
+		return redirect('admin/pending');
     }
 
    

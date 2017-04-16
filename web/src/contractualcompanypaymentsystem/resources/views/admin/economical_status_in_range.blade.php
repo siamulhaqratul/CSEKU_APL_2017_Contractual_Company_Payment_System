@@ -4,13 +4,13 @@
 <div class="container-fluid">
     <div class="row">
        <div class="col-md-8 col-md-offset-2" style="margin-top:50px;">
-            <h1> Total Economical Status </h1><hr>
+            <h1> Total Economical Status {{$startDate1}} To {{ $endDate1}}</h1><hr>
 
 
             <div class="panel panel-default" >
 
              <div class="panel-heading">
-                  <form class="form-inline"  role="form" method="POST" action="{{URL::to('admin/economical/story')}}">
+              <form class="form-inline"  role="form" method="POST" action="{{URL::to('admin/economical/story')}}">
                   {{ csrf_field() }}
             
               <div class="col-md-5">
@@ -43,10 +43,37 @@
                         <tbody> 
                         <?php  
                         $total = 0;
-                        ?>      
+                        $flag1 = 0;
+                        $flag2 = 0;
+                        ?>  
+
+                        <?php 
+
+                                  $startDate1 = str_replace('/', '-', $startDate1);
+
+                                  //echo $startDate1;
+
+                                  $startDate1 = strtotime($startDate1);
+
+          
+                                  $endDate1 = str_replace('/', '-', $endDate1);
+
+                                  //echo $endDate1;
+
+                                  $endDate1 = strtotime($endDate1);
+
+                                 
+                               
+
+                            ?>    
                            @foreach($contract_details as $contract_detail)
                             <tr>
                                  @if($contract_detail->Active==1 && $contract_detail->staff_id != null && $contract_detail->client_id != null) 
+
+                                 
+                                
+
+
                                 <td><center>{{$contract_detail->id}}</center></td>
 
                                  <td style="text-align:center">
@@ -57,24 +84,42 @@
 
 
                                  $staffPaymentPerDay = ($contract_detail->payment_for_staff_monthly)/($contract_detail->monthly_workingday);
+
+
                                  ?>
 
 
-                                @foreach($clinent_payments as $clinent_payment)
+                               
+                                <?php 
 
-
+                                foreach ($clinent_payments as $clinent_payment) {
+                                  # code...
                                 
-                               @if(($contract_detail->id == $clinent_payment->contract_id) 
-                               &&  ($clinent_payment->approved_by_manager == 1))
+                                  $flag1=0;
+                                  $date = $clinent_payment->date;
 
-                               <?php 
+                                  $date = strtotime($date);
+
+                                  if($startDate1<= $date && $date <= $endDate1){
+
+                                    $flag1 = 1;
+
+                                  }
+
+                                  if(($contract_detail->id == $clinent_payment->contract_id) 
+                               &&  ($clinent_payment->approved_by_manager == 1) && ($flag1 == 1)){
+
+                               
                                 $clientPayment += $clinent_payment->amount_paid;
 
-                               ?>
+
                                
+
+                                }}
+                                ?>
+                                                     
                                    
-                                @endif
-                                @endforeach
+                               
 
                                   {{$clientPayment}}
                                 </td>
@@ -84,9 +129,23 @@
                                 @foreach($stuff_dutys as $stuff_duty)
 
 
+                                <?php 
+                                $flag2 = 0;
+
+                                  $date3 = $stuff_duty->duty_date;
+
+                                  $date3 = strtotime($date3);
+
+
+                                  if($startDate1<=$date3 && $endDate1>= $date3){
+
+                                    $flag2 = 1;
+
+                                  }
+                                 ?>
                                 
                                @if(($contract_detail->id == $stuff_duty->contract_id) 
-                               &&  ($stuff_duty->paid == 1))
+                               &&  ($stuff_duty->paid == 1) && ($flag2 == 1))
 
                                <?php 
                                 $staffPayment += $staffPaymentPerDay;

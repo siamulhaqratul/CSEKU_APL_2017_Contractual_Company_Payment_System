@@ -23,7 +23,8 @@
                         <tbody>       
                             @foreach($contract_details as $contract_detail)
                             <tr>
-                                @if(empty($contract_detail->staff_id)) 
+                                @if((empty($contract_detail->staff_id)) && (!empty($contract_detail->client_id))) 
+
                                 <td>{{$contract_detail->client->name}}</td>
                                 <td>{{$contract_detail->client->contact_no}}</td>
                                 <td>{{$contract_detail->monthly_workingday}}</td>

@@ -16,6 +16,8 @@
                                 <th>Phone Number</th> 
                                 <th>Payment</th> 
                                 <th style="text-align:center">Action</th>
+                                <th style="text-align:center">Status</th>
+
                                 
                             </tr>
                         </thead>
@@ -28,12 +30,22 @@
                                 <td><center>{{$contract_details->payment_for_staff_monthly}}</center></td>
                                 
                                  <td><center>
-                                     <a  href="<?=URL::to('client/active_contract_delete',array($contract_details->id))?>"  class="btn btn-primary"><span class="glyphicon glyphicon-edit">Cancel</a>
-                                    <a  href="<?=URL::to('client/send_many',array($contract_details->id))?>"  class="btn btn-primary"><span class="glyphicon glyphicon-edit">Send Payment</a>
+                                     <a  href="<?=URL::to('client/active_contract_delete',array($contract_details->id))?>"  class="btn btn-danger">Cancel</a>
+                                    <a  href="<?=URL::to('client/send_many',array($contract_details->id))?>"  class="btn btn-primary">Send Payment</a>
                                     </center>
                                  </td>
+
+                                 <td>
+                                    
+                                    <center>
+                                         <a  href="<?=URL::to('client/see_history',array($contract_details->id))?>"  class="btn btn-primary">See History</a>
+                                    </center>
+
+                                    </center>
+                                </td>
                                
                                 @endif
+
                                   
                                 @endforeach
                            

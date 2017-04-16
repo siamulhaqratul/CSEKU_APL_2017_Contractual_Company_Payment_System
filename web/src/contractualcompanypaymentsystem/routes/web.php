@@ -4,6 +4,7 @@ use App\User;
 use App\Contract_detail;
 use App\Client_payment;
 use App\StuffDuty;
+use Illuminate\Http\Request;
 /*
 |------
 --------------------------------------------------------------------
@@ -81,6 +82,20 @@ Route::get('admin/economical_status', function () {
         return view('admin.economical_status',compact('contract_details','stuff_dutys','clinent_payments'));
 });
 
+//admin/economical/story
+
+Route::post('admin/economical/story', function (Request $request) {
+
+
+       $contract_details=Contract_detail::all();
+       $stuff_dutys = StuffDuty::all();
+       $clinent_payments = Client_payment::all();
+       $startDate1 = $request->start_date;
+       $endDate1 = $request->end_date;
+
+        return view('admin.economical_status_in_range',compact('contract_details','stuff_dutys','clinent_payments','startDate1','endDate1'));
+});
+
 
 Route::get('admin/active_user', function () {
 
@@ -88,16 +103,27 @@ Route::get('admin/active_user', function () {
         return view('admin.active_user',compact('users'));
 });
 
+
+
+
+
+
+/// See history
+
 Route::get('admin/see_history/{id}', function ($id) {
 
        $duty = StuffDuty::all();
 
         $id1=Auth::user()->id;
         $admin=User::find($id1);
+
+        $data1 = "Sort Ascending";
+        $data = "Sort Ascending";
         
 
         if($admin->rolename == "Admin"){
-        return view('admin.see_history',compact('duty','id'));
+
+        return view('admin.see_history',compact('duty','id','data','data1'));
     }
 });
 
@@ -108,10 +134,11 @@ Route::get('admin/see_history/des/date/{id}', function ($id) {
 
         $id1=Auth::user()->id;
         $admin=User::find($id1);
-        
+        $data = "Sort Ascending";
+        $data1 = "Sort Descending";
 
         if($admin->rolename == "Admin"){
-        return view('admin.see_history',compact('duty','id'));
+         return view('admin.see_history',compact('duty','id','data','data1'));
     }
 });
 
@@ -123,10 +150,10 @@ Route::get('admin/see_history/asc/app/{id}', function ($id) {
 
         $id1=Auth::user()->id;
         $admin=User::find($id1);
-        
-
+        $data = "Sort Descending";
+        $data1 = "Sort Descending";
         if($admin->rolename == "Admin"){
-        return view('admin.see_history',compact('duty','id'));
+        return view('admin.see_history',compact('duty','id','data','data1'));
     }
 });
 
@@ -137,10 +164,11 @@ Route::get('admin/see_history/dsc/app/{id}', function ($id) {
 
         $id1=Auth::user()->id;
         $admin=User::find($id1);
-        
+        $data = "Sort Ascending";
+        $data1 = "Sort Descending";
 
         if($admin->rolename == "Admin"){
-        return view('admin.see_history',compact('duty','id'));
+        return view('admin.see_history',compact('duty','id','data','data1'));
     }
 });
 
@@ -181,6 +209,8 @@ Route::get('admin/dogetmany/{id}','AdminController@getMany');
 Route::get('admin/active_contract_delete/{id}','AdminController@active_contract_delete');
 
 
+Route::get('admin/closecontract/{id}','AdminController@closeContract');
+
 
 
 
@@ -188,6 +218,18 @@ Route::get('admin/send_request/{id}', function ($id) {
         $contract_detail=Contract_detail::find($id);
         $users=User::all();
         return view('admin.send_request',compact('contract_detail','users'));
+});
+Route::get('admin/sorry', function () {
+
+        return view('admin.sorry');
+});
+Route::get('admin/sorry2', function () {
+
+        return view('admin.sorry2');
+});
+Route::get('admin/sorry3', function () {
+
+        return view('admin.sorry3');
 });
 
  Route::post('admin/send_request/store/','AdminController@store');
@@ -205,6 +247,13 @@ Route::get('/client/home', function () {
     $id=Auth::user()->id;
     $users=User::find($id);
     return view('client/home',compact('users'));
+});
+
+//client/see_histoy
+
+Route::get('client/see_history/{id}', function ($id) {
+    $clinent_payments = Client_payment::all();
+    return view('client/history',compact('clinent_payments','id'));
 });
 
 
@@ -233,11 +282,11 @@ Route::get('client/active_contract_delete/{id}','ClientController@active_contrac
 
 
 ///Staff Routs
-// Route::get('/staff/home', function () {
+Route::get('staff/see_history/{id}', function ($id) {
 
-//     $contract_details=Contract_detail::all();
-//     return view('staff/home');
-// });
+    $stuffduties=StuffDuty::all();
+    return view('staff/status',compact('stuffduties','id'));
+});
 
 
 Route::get('/staff/home', function () {
@@ -261,12 +310,10 @@ Route::get('staff/get_payment/{id}', function ($id) {
 Route::get('/staff/accept/{id}','StaffController@store');
 
 Route::get('/staff/delete/{id}','StaffController@delete');
-//confirmpayment
+
 Route::get('staff/confirmpayment/{id}','StaffController@confirmPayment');
 
 Route::get('staff/cancelcontract/{id}','StaffController@cancelContract');
-
-
 
 });
 

@@ -14,7 +14,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+    
     <!-- Scripts -->
     <script>
     window.Laravel = {!! json_encode([
@@ -24,7 +25,8 @@
 
 
     <script type="text/javascript">
-    function check(){
+    alert("yggg");
+    function delete(){
         return confirm("Are you sure to delete this user");////deleting massage
     </script>
 

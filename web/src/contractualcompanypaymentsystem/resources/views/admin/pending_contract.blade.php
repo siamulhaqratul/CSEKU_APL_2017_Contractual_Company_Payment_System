@@ -4,10 +4,10 @@
 <div class="container-fluid">
     <div class="row">
        <div class="col-md-8 col-md-offset-2" style="margin-top:50px;">
-            <h1> User Request</h1><hr>
+            <h1>Pending Contract</h1><hr>
             <div class="panel panel-default" >
 
-                <div class="panel-heading">User Listing</div>
+                
                 <div class="panel-body">                     
                     <table class="table table-bordered">
                         <thead>
@@ -22,7 +22,7 @@
                         <tbody>       
                             @foreach($contract_details as $contract_detail)
                             <tr>
-                                @if($contract_detail->Active == 0 && !empty($contract_detail->staff_id)) 
+                                @if($contract_detail->Active == 0 && !empty($contract_detail->staff_id) && !empty($contract_detail->client_id)) 
 
                                 <td>{{$contract_detail->staff->name}}</td>
                                 <td>{{$contract_detail->client->name}}</td>

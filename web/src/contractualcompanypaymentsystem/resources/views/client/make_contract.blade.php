@@ -29,7 +29,7 @@
                             <label for="start_date" class="col-md-4 control-label">Starting Date</label>
 
                             <div class="col-md-6">
-                                <input id="start_date" type="text" class="form-control" name="start_date" value="{{ old('start_date') }}" required>
+                                <input id="start_date" type="text" class="form-control" placeholder="dd/mm/YYYY" name="start_date" value="{{ old('start_date') }}" required>
 
 
                             </div>
